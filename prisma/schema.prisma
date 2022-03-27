@@ -1,0 +1,27 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["cockroachdb"]
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model challenges {
+  id          BigInt  @id(map: "primary")
+  time_commit BigInt?
+  description String?
+  name        String?
+}
+
+model user_to_challenges {
+  user_id      BigInt  @id(map: "primary")
+  challenge_id BigInt?
+}
+
+model users {
+  email    String  @id(map: "primary")
+  name     String?
+  password String?
+}
